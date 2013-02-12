@@ -1,6 +1,6 @@
 use strict;
 use warnings;
- 
+
 package XT::Schema;
 
 use Moose;
