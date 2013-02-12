@@ -35,16 +35,4 @@ In simple terms:
 
 =cut
 
-use Web::Simple 'XT';
-
-require XT::Controller::JSON;
-
-sub dispatch_request {
-  return (
-    '/json...' => sub {
-      XT::Controller::JSON->dispatch_request(@_);
-    },
-  );
-}
-
-__PACKAGE__->run_if_script;
+1;

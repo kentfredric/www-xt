@@ -1,9 +1,9 @@
 use strict;
 use warnings;
 
-package XT::Controller::JSON;
+package XT::Web::Controller::JSON;
 
-use Web::Simple 'XT::Controller::JSON';
+use Web::Simple 'XT::Web::Controller::JSON';
 use JSON;
 
 sub usage {
