@@ -20,7 +20,7 @@ sub base {
 
 sub gen_table {
   my ( $self, $class ) = @_;
-  my $t    = $class;
+  my $t = $class;
   $t =~ s/^XT::Schema::Result:://;
   $t =~ s/::/_/g;
   return lc($t);
