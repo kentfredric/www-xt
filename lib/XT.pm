@@ -60,4 +60,16 @@ If you already have an existing database from a previous version of XT
 
 =cut
 
+=head1 Tips
+
+If you're wanting to get a better idea of the database design, try this:
+
+    script/db_deploy.pl -d GraphViz -d Diagram -f write_ddl
+
+Then check out C<sql/{GraphViz,Diagram}/deploy/*/*.sql>
+
+They're actually poorly named .png files, and they'll give you a visual overview of the database.
+
+=cut
+
 1;

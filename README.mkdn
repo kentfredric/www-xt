@@ -25,6 +25,37 @@ In simple terms:
 - "hot" content is delivered to a "hot" page.  
 - everyone benefits
 
+# CONFIGURATION
+
+Recommended configuration is via [DBIx::Class::Schema::Config](http://search.cpan.org/perldoc?DBIx::Class::Schema::Config)
+
+    cat > ~/.dbic.json
+    {
+        "development": {
+            "dsn": "dbi:SQLite:/tmp/XT.sqlite"
+        }
+    }
+
+# Database Configuration
+
+Once your database spec is ready, deploying the database is simple:
+
+    script/db_deploy.pl -c development install
+
+If you already have an existing database from a previous version of XT
+
+    script/db_deploy.pl -c development upgrade
+
+# Tips
+
+If you're wanting to get a better idea of the database design, try this:
+
+    script/db_deploy.pl -d GraphViz -d Diagram -f write_ddl
+
+Then check out `sql/{GraphViz,Diagram}/deploy/*/*.sql`
+
+They're actually poorly named .png files, and they'll give you a visual overview of the database.
+
 # AUTHORS
 
 - Kent Fredric <kentfredric@gmail.com>
