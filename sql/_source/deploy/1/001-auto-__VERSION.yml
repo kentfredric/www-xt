@@ -1,0 +1,383 @@
+---
+schema:
+  procedures: {}
+  tables:
+    dbix_class_deploymenthandler_versions:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - version
+          match_type: ''
+          name: dbix_class_deploymenthandler_versions_version
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+      fields:
+        ddl:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: ddl
+          order: 3
+          size:
+            - 0
+        id:
+          data_type: int
+          default_value: ~
+          is_auto_increment: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 0
+        upgrade_sql:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: upgrade_sql
+          order: 4
+          size:
+            - 0
+        version:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 1
+          name: version
+          order: 2
+          size:
+            - 50
+      indices: []
+      name: dbix_class_deploymenthandler_versions
+      options: []
+      order: 1
+  triggers: {}
+  views: {}
+translator:
+  add_drop_table: 0
+  filename: ~
+  no_comments: 0
+  parser_args:
+    package: &1 !!perl/hash:XT::Schema
+      class_mappings:
+        DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult: __VERSION
+        XT::Schema::Result::Article: Article
+        XT::Schema::Result::Category: Category
+        XT::Schema::Result::Data: Data
+        XT::Schema::Result::Feed: Feed
+        XT::Schema::Result::User: User
+        XT::Schema::Result::Vote: Vote
+      source_registrations:
+        Article: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            category:
+              is_nullable: 0
+              is_numeric: 1
+              retreive_on_insert: 1
+            id:
+              is_auto_increment: 1
+              is_nullable: 0
+              is_numeric: 1
+              retreive_on_insert: 1
+            source_feed:
+              is_nullable: 1
+              is_numeric: 1
+              retrieve_on_insert: 1
+            submitting_user:
+              is_nullable: 0
+              is_numeric: 1
+              retreive_on_insert: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - source_feed
+            - submitting_user
+            - category
+          _primaries: &2
+            - id
+          _relationships:
+            article_has_category:
+              attrs: {}
+              class: Category
+              cond:
+                foreign.id: self.category
+              source: Category
+            article_has_feed:
+              attrs: {}
+              class: Feed
+              cond:
+                foreign.id: self.source_feed
+              source: Feed
+            article_has_submitting_user:
+              attrs: {}
+              class: User
+              cond:
+                foreign.id: self.submitting_user
+              source: User
+          _unique_constraints:
+            article_id_unique:
+              - id
+            primary: *2
+          name: article
+          result_class: XT::Schema::Result::Article
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: Article
+        Category: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            id:
+              is_auto_increment: 1
+              is_nullable: 0
+              is_numeric: 1
+              retrieve_on_insert: 1
+            name:
+              is_nullable: 0
+              is_numeric: 0
+              retrieve_on_insert: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - name
+          _primaries: &3
+            - id
+          _relationships: {}
+          _unique_constraints:
+            category_id_unique:
+              - id
+            primary: *3
+          name: category
+          result_class: XT::Schema::Result::Category
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: Category
+        Data: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            data:
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              is_nullable: 0
+              is_numeric: 0
+              retrieve_on_insert: 1
+              serializer_class: JSON
+            id:
+              is_auto_increment: 1
+              is_nullable: 0
+              is_numeric: 1
+              retrieve_on_insert: 1
+            name:
+              is_nullable: 0
+              is_numeric: 0
+              retrieve_on_insert: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - name
+            - data
+          _primaries: &4
+            - id
+          _relationships: {}
+          _unique_constraints:
+            data_id_unique:
+              - id
+            data_name_unique:
+              - name
+            primary: *4
+          name: data
+          result_class: XT::Schema::Result::Data
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: Data
+        Feed: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            id:
+              is_auto_increment: 1
+              is_nullable: 0
+              is_numeric: 1
+              retrieve_on_insert: 1
+            submitting_user:
+              is_nullable: 0
+              is_numeric: 1
+              retreive_on_insert: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - submitting_user
+          _primaries: &5
+            - id
+          _relationships:
+            feed_has_submitting_user:
+              attrs: {}
+              class: User
+              cond:
+                foreign.id: self.submitting_user
+              source: User
+          _unique_constraints:
+            feed_id_unique:
+              - id
+            primary: *5
+          name: feed
+          result_class: XT::Schema::Result::Feed
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: Feed
+        User: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            id:
+              is_auto_increment: 1
+              is_nullable: 0
+              is_numeric: 1
+              retrieve_on_insert: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+          _primaries: &6
+            - id
+          _relationships: {}
+          _unique_constraints:
+            primary: *6
+            user_id_unique:
+              - id
+          name: user
+          result_class: XT::Schema::Result::User
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: User
+        Vote: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            article_id:
+              is_nullable: 0
+              is_numeric: 1
+              retrieve_on_insert: 1
+            id:
+              is_auto_increment: 1
+              is_nullable: 0
+              is_numeric: 1
+              retrieve_on_insert: 1
+            user_id:
+              is_nullable: 0
+              is_numeric: 1
+              retrieve_on_insert: 1
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - article_id
+            - user_id
+          _primaries: &7
+            - id
+          _relationships:
+            vote_has_article:
+              attrs: {}
+              class: Article
+              cond:
+                foreign.id: self.article_id
+              source: Article
+            vote_has_user:
+              attrs: {}
+              class: User
+              cond:
+                foreign.id: self.user_id
+              source: User
+          _unique_constraints:
+            primary: *7
+            vote_combo_unique:
+              - article_id
+              - user_id
+            vote_id_unique:
+              - id
+          name: vote
+          result_class: XT::Schema::Result::Vote
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: Vote
+        __VERSION: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            ddl:
+              data_type: text
+              is_nullable: 1
+            id:
+              data_type: int
+              is_auto_increment: 1
+            upgrade_sql:
+              data_type: text
+              is_nullable: 1
+            version:
+              data_type: varchar
+              size: 50
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - version
+            - ddl
+            - upgrade_sql
+          _primaries: &8
+            - id
+          _relationships: {}
+          _unique_constraints:
+            dbix_class_deploymenthandler_versions_version:
+              - version
+            primary: *8
+          name: dbix_class_deploymenthandler_versions
+          result_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResultSet
+          schema: *1
+          source_name: __VERSION
+      storage: !!perl/hash:DBIx::Class::Storage::DBI
+        _connect_info:
+          - dsn: dbi:SQLite:/tmp/XT.sqlite
+        _dbh_details: {}
+        _dbh_gen: 0
+        _dbi_connect_info:
+          - dbi:SQLite:/tmp/XT.sqlite
+          - ~
+          - ~
+          - &9
+            AutoCommit: 1
+            PrintError: 0
+            RaiseError: 1
+            ShowErrorStatement: 1
+        _dbic_connect_attributes: *9
+        _in_do_block: 0
+        _sql_maker: ~
+        _sql_maker_opts: {}
+        savepoints: []
+        schema: *1
+        transaction_depth: 0
+    sources:
+      - __VERSION
+  parser_type: SQL::Translator::Parser::DBIx::Class
+  producer_args: {}
+  producer_type: SQL::Translator::Producer::YAML
+  show_warnings: 0
+  trace: 0
+  version: 0.11016
