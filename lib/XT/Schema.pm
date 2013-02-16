@@ -5,8 +5,12 @@ package XT::Schema;
 
 use Moose;
 
-extends 'DBIx::Class::Schema';
+use parent 'DBIx::Class::Schema';
 
-__PACKAGE__->meta->make_immutable;
+__PACKAGE__->load_namespaces();
+__PACKAGE__->load_components('Schema::Config');
+
+#__PACKAGE__->backup_directory( $backup );
+#__PACKAGE__->upgrade_directory($upgrades);
 
 1;

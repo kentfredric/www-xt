@@ -35,4 +35,29 @@ In simple terms:
 
 =cut
 
+=head1 CONFIGURATION
+
+Recommended configuration is via L<DBIx::Class::Schema::Config>
+
+    cat > ~/.dbic.json
+    {
+        "development": {
+            "dsn": "dbi:SQLite:/tmp/XT.sqlite"
+        }
+    }
+
+=cut
+
+=head1 Database Configuration
+
+Once your database spec is ready, deploying the database is simple:
+
+    script/db_deploy.pl -c development install
+
+If you already have an existing database from a previous version of XT
+
+    script/db_deploy.pl -c development upgrade
+
+=cut
+
 1;
