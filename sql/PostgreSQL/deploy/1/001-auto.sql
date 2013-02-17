@@ -1,6 +1,6 @@
 -- 
 -- Created by SQL::Translator::Producer::PostgreSQL
--- Created on Sun Feb 17 10:17:59 2013
+-- Created on Sun Feb 17 13:20:56 2013
 -- 
 ;
 --
@@ -8,7 +8,7 @@
 --
 CREATE TABLE "category" (
   "id" serial NOT NULL,
-  "name"  NOT NULL,
+  "name" text NOT NULL,
   PRIMARY KEY ("id")
 );
 
@@ -18,8 +18,8 @@ CREATE TABLE "category" (
 --
 CREATE TABLE "data" (
   "id" serial NOT NULL,
-  "name"  NOT NULL,
-  "data"  NOT NULL,
+  "name" text NOT NULL,
+  "data" text NOT NULL,
   PRIMARY KEY ("id"),
   CONSTRAINT "data_name_unique" UNIQUE ("name")
 );
@@ -39,7 +39,7 @@ CREATE TABLE "user" (
 --
 CREATE TABLE "feed" (
   "id" serial NOT NULL,
-  "submitting_user"  NOT NULL,
+  "submitting_user" integer NOT NULL,
   PRIMARY KEY ("id")
 );
 CREATE INDEX "feed_idx_submitting_user" on "feed" ("submitting_user");
@@ -50,9 +50,9 @@ CREATE INDEX "feed_idx_submitting_user" on "feed" ("submitting_user");
 --
 CREATE TABLE "article" (
   "id" serial NOT NULL,
-  "source_feed" ,
-  "submitting_user"  NOT NULL,
-  "category"  NOT NULL,
+  "source_feed" integer,
+  "submitting_user" integer NOT NULL,
+  "category" integer NOT NULL,
   PRIMARY KEY ("id")
 );
 CREATE INDEX "article_idx_category" on "article" ("category");
@@ -65,8 +65,8 @@ CREATE INDEX "article_idx_submitting_user" on "article" ("submitting_user");
 --
 CREATE TABLE "vote" (
   "id" serial NOT NULL,
-  "article_id"  NOT NULL,
-  "user_id"  NOT NULL,
+  "article_id" integer NOT NULL,
+  "user_id" integer NOT NULL,
   PRIMARY KEY ("id"),
   CONSTRAINT "vote_combo_unique" UNIQUE ("article_id", "user_id")
 );

@@ -1,6 +1,6 @@
 -- 
 -- Created by SQL::Translator::Producer::MySQL
--- Created on Sun Feb 17 10:17:59 2013
+-- Created on Sun Feb 17 13:20:56 2013
 -- 
 ;
 SET foreign_key_checks=0;
@@ -8,17 +8,17 @@ SET foreign_key_checks=0;
 -- Table: `category`
 --
 CREATE TABLE `category` (
-  `id`  NOT NULL auto_increment,
-  `name`  NOT NULL,
+  `id` integer NOT NULL auto_increment,
+  `name` text NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 --
 -- Table: `data`
 --
 CREATE TABLE `data` (
-  `id`  NOT NULL auto_increment,
-  `name`  NOT NULL,
-  `data`  NOT NULL,
+  `id` integer NOT NULL auto_increment,
+  `name` text NOT NULL,
+  `data` text NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE `data_name_unique` (`name`)
 );
@@ -26,15 +26,15 @@ CREATE TABLE `data` (
 -- Table: `user`
 --
 CREATE TABLE `user` (
-  `id`  NOT NULL auto_increment,
+  `id` integer NOT NULL auto_increment,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB;
 --
 -- Table: `feed`
 --
 CREATE TABLE `feed` (
-  `id`  NOT NULL auto_increment,
-  `submitting_user`  NOT NULL,
+  `id` integer NOT NULL auto_increment,
+  `submitting_user` integer NOT NULL,
   INDEX `feed_idx_submitting_user` (`submitting_user`),
   PRIMARY KEY (`id`),
   CONSTRAINT `feed_fk_submitting_user` FOREIGN KEY (`submitting_user`) REFERENCES `user` (`id`)
@@ -43,10 +43,10 @@ CREATE TABLE `feed` (
 -- Table: `article`
 --
 CREATE TABLE `article` (
-  `id`  NOT NULL auto_increment,
-  `source_feed`  NULL,
-  `submitting_user`  NOT NULL,
-  `category`  NOT NULL,
+  `id` integer NOT NULL auto_increment,
+  `source_feed` integer NULL,
+  `submitting_user` integer NOT NULL,
+  `category` integer NOT NULL,
   INDEX `article_idx_category` (`category`),
   INDEX `article_idx_source_feed` (`source_feed`),
   INDEX `article_idx_submitting_user` (`submitting_user`),
@@ -59,9 +59,9 @@ CREATE TABLE `article` (
 -- Table: `vote`
 --
 CREATE TABLE `vote` (
-  `id`  NOT NULL auto_increment,
-  `article_id`  NOT NULL,
-  `user_id`  NOT NULL,
+  `id` integer NOT NULL auto_increment,
+  `article_id` integer NOT NULL,
+  `user_id` integer NOT NULL,
   INDEX `vote_idx_article_id` (`article_id`),
   INDEX `vote_idx_user_id` (`user_id`),
   PRIMARY KEY (`id`),

@@ -1,6 +1,6 @@
 -- 
 -- Created by SQL::Translator::Producer::SQLite
--- Created on Sun Feb 17 10:17:59 2013
+-- Created on Sun Feb 17 13:20:57 2013
 -- 
 
 ;
@@ -9,34 +9,30 @@ BEGIN TRANSACTION;
 -- Table: category
 --
 CREATE TABLE category (
-  id  NOT NULL,
-  name  NOT NULL,
-  PRIMARY KEY (id)
+  id INTEGER PRIMARY KEY NOT NULL,
+  name text NOT NULL
 );
 --
 -- Table: data
 --
 CREATE TABLE data (
-  id  NOT NULL,
-  name  NOT NULL,
-  data  NOT NULL,
-  PRIMARY KEY (id)
+  id INTEGER PRIMARY KEY NOT NULL,
+  name text NOT NULL,
+  data text NOT NULL
 );
 CREATE UNIQUE INDEX data_name_unique ON data (name);
 --
 -- Table: user
 --
 CREATE TABLE user (
-  id  NOT NULL,
-  PRIMARY KEY (id)
+  id INTEGER PRIMARY KEY NOT NULL
 );
 --
 -- Table: feed
 --
 CREATE TABLE feed (
-  id  NOT NULL,
-  submitting_user  NOT NULL,
-  PRIMARY KEY (id),
+  id INTEGER PRIMARY KEY NOT NULL,
+  submitting_user int NOT NULL,
   FOREIGN KEY (submitting_user) REFERENCES user(id)
 );
 CREATE INDEX feed_idx_submitting_user ON feed (submitting_user);
@@ -44,11 +40,10 @@ CREATE INDEX feed_idx_submitting_user ON feed (submitting_user);
 -- Table: article
 --
 CREATE TABLE article (
-  id  NOT NULL,
-  source_feed ,
-  submitting_user  NOT NULL,
-  category  NOT NULL,
-  PRIMARY KEY (id),
+  id INTEGER PRIMARY KEY NOT NULL,
+  source_feed int,
+  submitting_user int NOT NULL,
+  category int NOT NULL,
   FOREIGN KEY (category) REFERENCES category(id),
   FOREIGN KEY (source_feed) REFERENCES feed(id),
   FOREIGN KEY (submitting_user) REFERENCES user(id)
@@ -60,10 +55,9 @@ CREATE INDEX article_idx_submitting_user ON article (submitting_user);
 -- Table: vote
 --
 CREATE TABLE vote (
-  id  NOT NULL,
-  article_id  NOT NULL,
-  user_id  NOT NULL,
-  PRIMARY KEY (id),
+  id INTEGER PRIMARY KEY NOT NULL,
+  article_id int NOT NULL,
+  user_id int NOT NULL,
   FOREIGN KEY (article_id) REFERENCES article(id),
   FOREIGN KEY (user_id) REFERENCES user(id)
 );

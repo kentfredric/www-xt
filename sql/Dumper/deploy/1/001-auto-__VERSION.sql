@@ -56,8 +56,8 @@ my @tables = (
         table_name  => 'dbix_class_deploymenthandler_versions',
         fields      => [ qw/ id version ddl upgrade_sql / ],
         types       => {
-            'upgrade_sql' => 'string',
             'ddl' => 'string',
+            'upgrade_sql' => 'string',
             'version' => 'string',
             'id' => 'number',
         },

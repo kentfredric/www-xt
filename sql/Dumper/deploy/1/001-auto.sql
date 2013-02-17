@@ -56,17 +56,17 @@ my @tables = (
         table_name  => 'category',
         fields      => [ qw/ id name / ],
         types       => {
+            'name' => 'string',
             'id' => 'number',
-            'name' => 'number',
         },
     },
     {
         table_name  => 'data',
         fields      => [ qw/ id name data / ],
         types       => {
-            'data' => 'number',
+            'data' => 'string',
+            'name' => 'string',
             'id' => 'number',
-            'name' => 'number',
         },
     },
     {
@@ -88,8 +88,8 @@ my @tables = (
         table_name  => 'article',
         fields      => [ qw/ id source_feed submitting_user category / ],
         types       => {
-            'submitting_user' => 'number',
             'source_feed' => 'number',
+            'submitting_user' => 'number',
             'category' => 'number',
             'id' => 'number',
         },
@@ -98,9 +98,9 @@ my @tables = (
         table_name  => 'vote',
         fields      => [ qw/ id article_id user_id / ],
         types       => {
-            'id' => 'number',
             'user_id' => 'number',
             'article_id' => 'number',
+            'id' => 'number',
         },
     },
 );
