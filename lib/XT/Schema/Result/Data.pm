@@ -20,7 +20,7 @@ column name => {
 column data => {
   data_type        => text =>,
   is_nullable      => 0,
-  serializer_class => 'YAML',
+  serializer_class => 'JSYNC',
 };
 
 unique_constraint data_name_unique => ['name'];
