@@ -8,25 +8,21 @@ package XT::Schema::Result::Data;
 use XT::Schema::Candy -components => [ 'InflateColumn::Serializer', 'Core' ];
 
 primary_column id => {
-  is_numeric         => 1,
-  is_nullable        => 0,
+  data_type          => int =>,
   is_auto_increment  => 1,
   retrieve_on_insert => 1,
 };
 column name => {
-  is_numeric         => 0,
-  is_nullable        => 0,
-  retrieve_on_insert => 1,
+  data_type   => text =>,
+  is_nullable => 0,
 };
 
 column data => {
-  is_numeric         => 0,
-  is_nullable        => 0,
-  retrieve_on_insert => 1,
-  serializer_class   => 'JSON',
+  data_type        => text =>,
+  is_nullable      => 0,
+  serializer_class => 'YAML',
 };
 
-unique_constraint data_id_unique   => ['id'];
 unique_constraint data_name_unique => ['name'];
 
 1;

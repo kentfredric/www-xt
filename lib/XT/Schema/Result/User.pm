@@ -8,13 +8,11 @@ package XT::Schema::Result::User;
 use XT::Schema::Candy;
 
 primary_column id => {
-  is_numeric         => 1,
+  data_type          => int =>,
   is_nullable        => 0,
   is_auto_increment  => 1,
   retrieve_on_insert => 1,
 };
-
-unique_constraint user_id_unique => ['id'];
 
 1;
 
